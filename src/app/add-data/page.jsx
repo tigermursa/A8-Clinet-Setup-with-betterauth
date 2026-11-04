@@ -1,6 +1,8 @@
 "use client";
 
 import toast, { Toaster } from "react-hot-toast";
+import { authClient } from "../lib/auth-client";
+import { getTokenFromClient } from "../lib/getTokenFromClient";
 
 // API Function
 const addProduct = async (productData) => {
@@ -25,7 +27,8 @@ const addProduct = async (productData) => {
 const AddDataPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const token = await getTokenFromClient();
+    console.log("Token in add-data:", token);
     const form = e.currentTarget;
     const formData = new FormData(form);
     const productData = Object.fromEntries(formData.entries());
